@@ -26,7 +26,13 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
+<!-- Self Made CSS file library import  -->
 
+	<link rel="stylesheet"
+	href="css/style.css"> 
+	<!-- Self Made CSS file library import  -->
+	
 <style>
 .btn {
 	background-color: DodgerBlue;
@@ -39,11 +45,14 @@
 </style>
 
 </head>
-<body>
+ <body
+style="background-image: url(Images/chinaTemple.jpg); background-size:cover; background-attachment:fixed; height:100%; width:100%">	
 
-	<header style="height: 30px; background-color: #B70C1B;"></header>
-
+	<header class = "header"></header>
+		<br/>
+		<br/>
 	<div class="container mb-3 mt-3">
+	<font face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font>
 		<img src="Images/beatifulScene.jfif" style="height: 180px">
 
 		<!--****Make the connection to the preferred DataBase and Start Xamppp****  -->
@@ -53,37 +62,29 @@
 
 		<div class="form-group" style="width: 50%">
 
-			<form action="updateNewPassword" method = "post">
-				<%String email = (String) request.getParameter("temail");%>
-				<label for="password"> Enter a new password: </label> 
-				<input type="password" class="form-control" name="password1"
+			<form action="updatePasswordEqualityServlet" method = "post">
+				<%-- <%String email = (String) request.getParameter("temail");%> --%>
+				<label for="password" style="color:white"> Enter a new password*: </label> 
+				<input type="password" class="form-control" name="password1" required
 					placeholder="Enter your new password.."> <br /> 
 					
-					<label for="password"> Re-enter a new password: </label> 
-					<input type="password" class="form-control" name="password2"
+					<label for="password" style="color:white"> Re-enter a new password*: </label> 
+					<input type="password" class="form-control" name="password2" required
 					placeholder="Enter your new password again.."> <br />
 					
+					
+					<button type="submit" class="btn btn-success">Submit</button>
 					<!-- this might be done in servlet -->
 					
 					
-					<%
-					if(request.getParameter("password1") == null || request.getParameter("password2") == null){%>
-						<a href="getNewPasswords.jsp">
-						<%request.setAttribute("message", "Passwords not entered.");%>
-						<button type="button" class="btn btn-primary">Submit</button>
-						</a>
-					<%} else if(request.getParameter("password1").equals(request.getParameter("password2"))){%>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					<%}else{%>
-					<a href="getNewPasswords.jsp">
-						<%request.setAttribute("message", "Passwords do not match.");%>
-						<button type="button" class="btn btn-primary">Submit</button>
-						</a>
-					<%}%>
+					
 					
 				
 			</form>
 		</div>
 	</div>
+	<br/>
+    <br/>
+	<footer class = "footer">@Copyright Banepali 2020</footer>
 </body>
 </html>

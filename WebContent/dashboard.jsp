@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>Dashboard</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -12,29 +12,53 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+	
+	
+	<!-- Self Made CSS file library import  -->
 
-	<header style="height: 30px; background-color: #B70C1B;">
+	<link rel="stylesheet"
+	href="css/style.css"> 
+	<!-- Self Made CSS file library import  -->
+	
+</head>
+ <body
+style="background-image: url(Images/chinaTemple.jpg); background-size:cover; background-attachment:fixed; height:100%; width:100%">	
+
+<header class = "header">
+	<b style = " position: relative;  left: 50px; color:white"><br/>Hello! ${sessionScope.userData.name}</b> 
+	<a href="showAllContactInfoServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
+			<button type="button" class="btn btn-warning" style="position: absolute; top:5px; right: 90px;">Contact Us</button>
+		</a>
+		<!-- here I got the position of my text to be in the left side of the screen, so chose position: "relative" and for the buttons "Contact us and Logout" in the right side of the screen, so chose the position: "absolute"  -->
+	<a href="logoutServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
+			<button type="button" class="btn btn-danger" style="position: absolute; top:5px; right: 10px;">LogOut</button>
+		</a> <!-- Add a welcome message we the name in it --></header>
+<br/>
+<br/>
 	
 	
-	<!-- Add a welcome message we the name in it -->
-	</header>
+	
 
 	<div class="container mb-3 mt-3">
+	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font><br/><br/>
 		 <img src="Images/beatifulScene.jfif"
 			style="height: 180px">
 				<!--****Make the connection to the preferred DataBase and Start Xamppp****  -->
  
-		<a href="showAllData.jsp"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
+		
+		<a href="showProfileServlet?email=${sessionScope.userData.email}">
+					<button type="button" class="btn btn-primary">Profile</button>
+				</a>
+				<a href="showAllEmployeesServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
 			<button type="button" class="btn btn-info">Employees</button>
 		</a>
+		<a href="register.jsp">
+					<button type="button" class="btn btn-success">Register/Sign Up</button>
+				</a>
 		
-		<a href="contacts.jsp"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
-			<button type="button" class="btn btn-info">Contact Us</button>
-		</a>
 		
 		
+		 
 		<!-- You can make a file like "process.jsp" as we go from 
 		"register.jsp" to "process.jsp", this process file process 
 		the request and sends back to the "register.jsp" page
@@ -42,9 +66,7 @@
 		it goes to "LogOutProcess.jsp" and the processes it 
 		and sends back to the "index.jsp" page. -->
 		
-		<a href="logout.jsp"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
-			<button type="button" class="btn btn-warning">LogOut</button>
-		</a>
+		
 		
 		<hr />
 
@@ -52,5 +74,8 @@
 		</div>
 
 	</div>
+	<br/>
+    <br/>
+	<footer class = "footer">@Copyright Banepali 2020</footer>
 </body>
 </html>

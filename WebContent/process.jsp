@@ -81,8 +81,9 @@
 	<%
 		} else {
 		EmployeeDao employeeDao = new EmployeeDaoImpl();
-		EmployeeEntity entity = new EmployeeEntity(0, userid, password, name, email, dateFromStringAgain, mob, sal, sssn,
-		null, null);
+		
+		EmployeeEntity entity = new EmployeeEntity(employeeDao.getIncrementedEId(), userid, password, name, email, dateFromStringAgain, mob, sal, sssn,
+		null, null, new EmployeeEntity().getRole());
 		employeeDao.save(entity);
 
 		request.setAttribute("message", "You have succcessfully registered..");

@@ -31,10 +31,10 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		Optional<EmployeeEntity> optionalEmplEntity = employeeDao.employeeLogin(email, password);
 		
 		if(optionalEmplEntity.isPresent()) {
-			//HttpSession session = req.getSession();
-			//session.setAttribute("userData", optionalEmplEntity.get());
+			HttpSession session = req.getSession(); //benefits: we can get the data in everywhere, NOT on only forwarded page
+			session.setAttribute("userData", optionalEmplEntity.get());
 			
-			req.setAttribute("userData", optionalEmplEntity.get());
+			//req.setAttribute("userData", optionalEmplEntity.get()); //this only gives to the forwarded page
 
 			req.getRequestDispatcher("dashboard.jsp").forward(req,resp);
 			

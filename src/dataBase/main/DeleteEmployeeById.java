@@ -38,5 +38,6 @@ public class DeleteEmployeeById {
         }else{
             System.exit(0);
         }
+        scan.close();
     }
 }

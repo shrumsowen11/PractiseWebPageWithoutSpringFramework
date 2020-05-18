@@ -46,6 +46,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return rowCount > 0 ? "Rows Updated." : "Rows not Updated.";
 
 	}
+	
+	
+	
 
 	@Override
 	public List<EmployeeEntity> findAll() {
@@ -69,9 +72,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 				Timestamp createDate = resultSet.getTimestamp(10);
 				Timestamp updateDate = resultSet.getTimestamp(11);
+				String role = resultSet.getString(12);
 
 				EmployeeEntity employeeEntity = new EmployeeEntity(eID, userId, password, name, email, date, mobile,
-						salary, ssn, createDate, updateDate);
+						salary, ssn, createDate, updateDate, role);
 
 				employeeEntities.add(employeeEntity);
 			}
@@ -85,6 +89,31 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employeeEntities;
 	}
 
+	
+	
+	@Override
+	public List<String> findAllUserId() {
+		List<String> userIds = new ArrayList<String>();
+
+		try (Connection conn = SQLConnectionUtils.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_ALL_USERID)) {
+			java.sql.ResultSet resultSet = pstmt.executeQuery();
+
+			while (resultSet.next()) {
+				userIds.add(resultSet.getString(1));
+				}
+
+			// printing all the employees from the list
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return userIds;
+	}
+
+
+	
+	
 	
 	
 	@Override
@@ -134,7 +163,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11));
+						resultSet.getTimestamp(11),resultSet.getString(12));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -143,7 +172,25 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employeeEntities;
 	}
 	
-	
+	@Override
+	public EmployeeEntity employeeByUserId(String userId) {
+		EmployeeEntity employeeEntities = null;
+		try (Connection conn = SQLConnectionUtils.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_EMP_BY_USERID)) {
+			pstmt.setString(1, userId);
+			java.sql.ResultSet resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
+						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
+						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
+						resultSet.getTimestamp(11),resultSet.getString(12));
+			}
+
+		} catch (SQLException | ClassNotFoundException throwables) {
+			throwables.printStackTrace();
+		}
+		return employeeEntities;
+	}
 	
 
 	@Override
@@ -157,7 +204,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11));
+						resultSet.getTimestamp(11),resultSet.getString(12));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -182,7 +229,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11));
+						resultSet.getTimestamp(11),resultSet.getString(12));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -205,7 +252,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11));
+						resultSet.getTimestamp(11),resultSet.getString(12));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -219,7 +266,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		EmployeeDao employeeDao = null;
 		int rowCount = 0;
 		try (Connection conn = SQLConnectionUtils.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.UPDATE_EMP_TBL)) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.UPDATE_EMP_TBL_BY_EID)) {
 
 			EmployeeEntity employeeEntity = employeeById(entity.geteID());
 			/*
@@ -343,6 +390,163 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		return rowCount > 0 ? "Update Successful" : "Not updated yet. ";
 	}
+	
+	@Override
+	public int getIncrementedEId() {
+		int eId = 1;
+		try (Connection conn = SQLConnectionUtils.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_MAX_EID)) {
+			ResultSet resultSet = pstmt.executeQuery();
+			if(resultSet.next()) {
+				eId = resultSet.getInt(1);
+				eId++;
+			}
+			
+		}catch (SQLException | ClassNotFoundException throwables) {
+			throwables.printStackTrace();
+		}
+		
+		return eId;
+		
+	}
+	
+	
+	
+	@Override
+	public String updateEmployeeByUserId(EmployeeEntity entity) {
+		EmployeeDao employeeDao = null;
+		int rowCount = 0;
+		try (Connection conn = SQLConnectionUtils.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.UPDATE_EMP_TBL_BY_USERID)) {
+
+			EmployeeEntity employeeEntity = employeeByUserId(entity.getUserId());
+			/*
+			 * First check if the given field values(inputted) from "entity" are good or
+			 * not(null or not), then put those field value gotten from the entity to the
+			 * Java class EmployeeEntity, and from the Java EmployeeEntity, you can go ahead
+			 * and update the data into the DataBase. >> employeeEntity.set... --> part for
+			 * the EmployeeEntity & >> pstmt.set.... --> part for the DataBase
+			 */
+			/*
+			 * String UPDATE_EMP_TBL = "update employee_tbl set eid = ? ,userid = ?,
+			 * password =?,name = ?, email = ?, DOB = ?, mobile = ?, salary = ?, ssn = ?,
+			 * createdate = ?, updatedate = ? where eid = ?";
+			 */
+			employeeDao = new EmployeeDaoImpl();
+			String eId = Integer.toString(entity.geteID());
+			if (!eId.isEmpty()) {
+				// here instead of "0" get the list of eIds and compare with the eids in that
+				// list.
+				employeeEntity.seteID(entity.geteID());
+				pstmt.setInt(1, entity.geteID());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).geteID();
+				pstmt.setInt(1, employeeDao.employeeByUserId(entity.getUserId()).geteID());
+				
+			}
+			
+			if (entity.getUserId() != null) {
+				employeeEntity.setUserId(entity.getUserId());
+				pstmt.setString(2, entity.getUserId());
+				pstmt.setString(12, entity.getUserId());
+			} else {
+				return "User not in the DataBase.";
+			}
+
+			if (entity.getPassword() != null) {
+				employeeEntity.setPassword(entity.getPassword());
+				pstmt.setString(3, entity.getPassword());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getPassword();
+				pstmt.setString(3, employeeDao.employeeByUserId(entity.getUserId()).getPassword());
+
+			}
+
+			if (entity.getName() != null) {
+				employeeEntity.setName(entity.getName());
+				pstmt.setString(4, entity.getName());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getName();
+				pstmt.setString(4, employeeDao.employeeByUserId(entity.getUserId()).getName());
+
+			}
+
+			if (entity.getEmail() != null) {
+				employeeEntity.setEmail(entity.getEmail());
+				pstmt.setString(5, entity.getEmail());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getEmail();
+				pstmt.setString(5, employeeDao.employeeByUserId(entity.getUserId()).getEmail());
+
+			}
+
+			if (entity.getDate() != null) {
+				employeeEntity.setDate(entity.getDate());
+				pstmt.setDate(6, new java.sql.Date(entity.getDate().getTime()));
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getDate();
+				pstmt.setDate(6, new java.sql.Date(employeeDao.employeeByUserId(entity.getUserId()).getDate().getTime()));
+
+			}
+
+			if (entity.getMobile() != 0) {
+				employeeEntity.setMobile(entity.getMobile());
+				pstmt.setLong(7, entity.getMobile());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getMobile();
+				pstmt.setLong(7, employeeDao.employeeByUserId(entity.getUserId()).getMobile());
+
+			}
+
+			if (entity.getSalary() != 0) {
+				employeeEntity.setSalary(entity.getSalary());
+				pstmt.setDouble(8, entity.getSalary());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getSalary();
+				pstmt.setDouble(8, employeeDao.employeeByUserId(entity.getUserId()).getSalary());
+
+			}
+
+			if (entity.getSsn() != 0) {
+				employeeEntity.setSsn(entity.getSsn());
+				pstmt.setLong(9, entity.getSsn());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getSsn();
+				pstmt.setLong(9, employeeDao.employeeByUserId(entity.getUserId()).getSsn());
+
+			}
+
+			if (entity.getCreateDate() != null) {
+				employeeEntity.setCreateDate(entity.getCreateDate());
+				pstmt.setTimestamp(10, entity.getCreateDate());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getCreateDate();
+				pstmt.setTimestamp(10, employeeDao.employeeByUserId(entity.getUserId()).getCreateDate());
+
+			}
+
+			if (entity.getUpdateDate() != null) {
+				employeeEntity.setUpdateDate(entity.getUpdateDate());
+				pstmt.setTimestamp(11, entity.getUpdateDate());
+			} else {
+				employeeDao.employeeByUserId(entity.getUserId()).getUpdateDate();
+				pstmt.setTimestamp(11, employeeDao.employeeByUserId(entity.getUserId()).getUpdateDate());
+
+			}
+			System.out.println(employeeEntity);
+			rowCount = pstmt.executeUpdate();
+
+		} catch (SQLException | ClassNotFoundException throwables) {
+			throwables.printStackTrace();
+		}
+
+		return rowCount > 0 ? "Update Successful" : "Not updated yet. ";
+	}
+	
+	
+	
+	
+	
 
 	@Override
 	public String updatePassword(String email, String password) {

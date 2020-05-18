@@ -4,23 +4,24 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class EmployeeEntity {
-    int eID;
-    String userId;
-    String password;
-    String name;
-    String email;
-    Date date;
-    long mobile;
-    double salary;
-    long ssn;
-    Timestamp createDate;
-    Timestamp updateDate;
+    private int eID;
+    private String userId;
+    private String password;
+    private String name;
+    private String email;
+    private Date date;
+    private long mobile;
+    private double salary;
+    private long ssn;
+    private Timestamp createDate;
+    private Timestamp updateDate;
+    String role = "Customer";
 
 	
-	 public EmployeeEntity() { }
+	public EmployeeEntity() { }
 	 
     public EmployeeEntity(int eID, String userId, String password, String name, String email, Date date, long mobile,
-			double salary, long ssn, Timestamp createDate, Timestamp updateDate) {
+			double salary, long ssn, Timestamp createDate, Timestamp updateDate, String role) {
 		super();
 		this.eID = eID;
 		this.userId = userId;
@@ -33,10 +34,19 @@ public class EmployeeEntity {
 		this.ssn = ssn;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+		this.role = role;
 	}
 
 
 
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getPassword() {
 		return password;
@@ -130,6 +140,6 @@ public class EmployeeEntity {
 	public String toString() {
 		return "EmployeeEntity [eID=" + eID + ", userId=" + userId + ", password=" + password + ", name=" + name
 				+ ", email=" + email + ", date=" + date + ", mobile=" + mobile + ", salary=" + salary + ", ssn=" + ssn
-				+ ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", role=" + role + "]";
 	}
 }

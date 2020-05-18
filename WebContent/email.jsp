@@ -10,11 +10,22 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
+  
+  <!-- Self Made CSS file library import  -->
+
+	<link rel="stylesheet"
+	href="css/style.css"> 
+	<!-- Self Made CSS file library import  -->
+	
 </head>
-<body>
-<header style ="height: 30px; background-color: #B70C1B;"></header>
-	 	
+ <body
+	style="background-image: url(Images/chinaTemple.jpg); background-size: cover">
+<header class = "header"></header>
+<br/>
+<br/>
 	<div class="container mb-3 mt-3">
+	<font face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font>
 	<a href="index.jsp">
 					<button type="button" class="btn btn-success">Go Back</button>
 				</a>
@@ -62,5 +73,8 @@
 				</a>
 		
 </div>
+<br/>
+    <br/>
+<footer class = "footer">@Copyright Banepali 2020</footer>
 </body>
 </html>

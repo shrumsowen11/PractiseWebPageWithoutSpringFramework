@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+<%-- <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> --%>
+
 <%@page import="java.util.Optional"%>
 <%@page import="dataBase.dao.entity.EmployeeEntity"%>
 <%@page import="dataBase.EmployeeDaoImpl"%>
 <%@page import="dataBase.EmployeeDao"%>
 <html>
 <head>
-<title>Forgot Password</title>
+<title>Email Validation</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -27,23 +29,24 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-<style>
-.btn {
-	background-color: DodgerBlue;
-	border: none;
-	color: white;
-	padding: 12px 16px;
-	font-size: 16px;
-	cursor: pointer;
-}
-</style>
+
+<!-- Self Made CSS file library import  -->
+
+	<link rel="stylesheet"
+	href="css/style.css"> 
+	<!-- Self Made CSS file library import  -->
+	
+
 
 </head>
-<body>
+ <body
+style="background-image: url(Images/chinaTemple.jpg); background-size:cover; background-attachment:fixed; height:100%; width:100%">	
 
-	<header style="height: 30px; background-color: #B70C1B;"></header>
-
+	<header class = "header"></header>
+<br/>
+<br/>
 	<div class="container mb-3 mt-3">
+	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font><br/><br/>
 		<img src="Images/beatifulScene.jfif" style="height: 180px">
 		
 		<!--****Make the connection to the preferred DataBase and Start Xamppp****  -->
@@ -59,15 +62,12 @@
 			<!--methods are "post(secured), put, delete, patch, get(default and not secure)"  -->
 			<!-- whenever the submit button is clicked, then this page is called -->
 
-			<label for="email"> Email Address: </label> <input type="email"
-				class="form-control" name="temail" placeholder="Enter your Email">
+			<label for="email" style="color:white"> Email Address*: </label> <input type="email"
+				class="form-control" name="temail" required placeholder="Enter your Email">
+				<!-- here putting "required makes the input field essential and input cannot just hit the "Search" button. 
+				clicking "Search" button, without entering data, wont let the user go forward, asks for data to the user.  -->
 			<br />
 			
-
-			
- 		
-		
-
 				<button class="btn btn-info">
 					<!--  FA icons -->
 					<i class="fa fa-search-alt fa-sm"></i>Search
@@ -76,5 +76,8 @@
 			</form>
 			</div>
 		</div>
+		<br/>
+		<br/>
+		<footer class = "footer">@Copyright Banepali 2020</footer>
 </body>
 </html>

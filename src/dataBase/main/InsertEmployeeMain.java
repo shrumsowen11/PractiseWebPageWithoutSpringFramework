@@ -52,8 +52,8 @@ public class InsertEmployeeMain {
 
         System.out.println("Enter the ssn: ");
         long ssn = scan.nextLong();
-
-        EmployeeEntity entity = new EmployeeEntity(eid,userid,password, name,email, new java.sql.Date(date1.getTime()), mobile,salary,ssn,null,null);
+        
+        EmployeeEntity entity = new EmployeeEntity(eid,userid,password, name,email, new java.sql.Date(date1.getTime()), mobile,salary,ssn,null,null,new EmployeeEntity().getRole());
 
         System.out.println("Saving all the data of the new Employee inside the entity in the JAVA side first...");
 

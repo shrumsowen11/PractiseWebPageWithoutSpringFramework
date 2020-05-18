@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="dataBase.dao.entity.EmployeeEntity"%>
 <%@page import="java.util.List"%>
@@ -41,12 +44,25 @@
 <script>
 	$('#myTable').DataTable();
 </script>
-</head>
-<body>
 
-	<header style="height: 30px; background-color: #B70C1B;"></header>
-	<br />
+<!-- Self Made CSS file library import  -->
+
+	<link rel="stylesheet"
+	href="css/style.css"> 
+	<!-- Self Made CSS file library import  -->
+	
+</head>
+ <body
+	style="background-image: url(Images/chinaTemple.jpg); background-size:cover; background-attachment:fixed; height:100%; width:100%">
+	<header class = "header">
+		<a href="logoutServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
+			<button type="button" class="btn btn-danger" style="position: absolute; top:5px; right: 10px;">LogOut</button>
+		</a> <!-- Add a welcome message we the name in it --></header>
+	</header>
+<br/>
+<br/>
 	<div class="container mb-3 mt-3">
+	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font><br/><br/>
 		<!--  margin bottom and margin top == 3-->
 		<a href="showAllData.jsp"> <img src="Images/beatifulScene.jfif"
 			style="height: 180px">
@@ -56,7 +72,7 @@
 		<!--****Make the connection to the preferred DataBase and Start Xamppp****  -->
 
 	 <table id="myTable"
-			class="table table-striped table-bordered sortable" cellspacing="0"
+			class="table table-striped table-bordered sortable"  style="color:white" cellspacing="0"
 			width="100%">
 
 			<thead>
@@ -69,6 +85,10 @@
 					
 				</tr>
 			</thead>
+			
+			<tbody> 
+						<!-- Before learning Servlet, I did like this -->
+		<%-- 	
 			<%
 			EmployeeDao employeeDao = new EmployeeDaoImpl();
 			List<EmployeeEntity> employeeList = new ArrayList<EmployeeEntity>();
@@ -76,8 +96,13 @@
 
 			for (EmployeeEntity employees : employeeList) {
 			%>
-			<tbody>
-				<tr>
+			 --%>
+						<!-- Before learning Servlet, I did like this -->
+			
+			<!-- <tbody> -->
+			
+			<!-- Before learning Servlet, I did like this -->
+				<%-- <tr>
 					<td><%=employees.geteID()%></td>
 					<td><%=employees.getUserId()%></td>
 					<td><%=employees.getName()%></td>
@@ -86,14 +111,36 @@
 				</tr>
 				<%
 					}
-				%>
+				%> --%>
+				
+				<!-- Before learning Servlet, I did like this -->
+				<!--*************************************************************  -->
+				
+				<!-- After learning Servlet, I did like this -->
+				
+				
+			<c:forEach items = "${employeeList}" var = "entity" >
+			
+			
+				<tr>
+					<td>${entity.eID}</td>
+					<td>${entity.userId}</td>
+					<td>${entity.name}</td>
+					<td>${entity.email}</td>
+					<td>${entity.mobile}</td>
+					
+
+				</tr>
+				</c:forEach>
+				
 			</tbody>
 		</table> 
 	
 	</div>
+	<br/>
+    <br/>
 
-	<footer style="position: fixed; left: 0; bottom: 0; width: 100%; background-color: #00fff3;"></footer>
-
+<footer class = "footer">@Copyright Banepali 2020</footer>
 
 </body>
 </html>

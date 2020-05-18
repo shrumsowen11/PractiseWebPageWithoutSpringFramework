@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>AudiShow</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -14,6 +14,7 @@
 	<header style ="height: 30px; background-color: #B70C1B;"></header>
 	 	
 	<div class ="container">
+	
 		<img src = "Images/AudiWelcome.jfif" style = "height: 100px ;width: fit-content;" align = "middle">
 			<a href = "Models.jsp">	
    				   				<button type="button" class="btn btn-info">Models</button>

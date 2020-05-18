@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +23,7 @@ public class DeletePersonServlet extends HttpServlet {
 		String email = req.getParameter("email");
 		EmployeeDao employeeDao = new EmployeeDaoImpl();
 		employeeDao.deleteByEmail(email);
-		req.getRequestDispatcher("showPerson.jsp").forward(req, resp);
+		req.getRequestDispatcher("showAllEmployeesServlet").forward(req, resp);
 	}
 
 	

@@ -1,4 +1,8 @@
+
+
 <!DOCTYPE html>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="dataBase.dao.entity.EmployeeEntity"%>
 <%@page import="java.util.List"%>
@@ -19,7 +23,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<!-- For DataTables Library -->
+<!-- For DataTables Library from here -->
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 <script
@@ -36,7 +40,7 @@
 </script>
 
 
-<!-- For DataTables -->
+<!-- For DataTables upto here -->
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -47,45 +51,39 @@
 
 
 <!-- My Table name("myTable" for this case) included inside the <table> in ID section -->
+<!-- This will not work if you have done the JAVA coding inside the jsp file. You will have to write your Java code in a seperate Servlet file for this   -->
 <script>
 	$('#myTable').DataTable();
 </script>
 
-<!-- Styling the buttons -->
-<style>
-.btn {
-  background-color: Red;
-  border: none;
-  color: white;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer; /* Mouse pointer on hover */
-}
+<!-- Self Made CSS file library import  -->
 
-/* the in-built class "btn" has the in-built functionality of being darker when the mouse pointer is hovered */
-
-/* Darker background on mouse-over */
-/*  .btn:hover {
-  background-color: Blue;
-}  */
-
-</style>
+	<link rel="stylesheet"
+	href="css/style.css"> 
+	<!-- Self Made CSS file library import  -->
+	
 </head>
-<body>
+ <body
+style="background-image: url(Images/chinaTemple.jpg); background-size:cover; background-attachment:fixed; height:100%; width:100%">	
 
-	<header style="height: 30px; background-color: #B70C1B;"></header>
-	<br />
+<header class = "header"><b style = "margin-left: 50px;">Hello! ${sessionScope.userData.name}</b></header>
+<br/>
+<br/>
 	<div class="container mb-3 mt-3">
+	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font>
 		<!--  margin bottom and margin top == 3-->
 		<a href="showAllData.jsp"> <img src="Images/beatifulScene.jfif"
 			style="height: 180px">
 		</a>
-		<a href="dashboard.jsp">
-			<button type="button" class="btn btn-success">Go Back</button>
-		</a>
-		<a href="logout.jsp"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
+		<a href="register.jsp">
+					<button type="button" class="btn btn-success">Register/Sign Up</button>
+				</a>
+		<a href="logoutServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
 			<button type="button" class="btn btn-warning">LogOut</button>
 		</a>
+		<br/>
+		<br/>
+		<span style = "font-size:18px; color: red;"  >${message} </span>
 		<hr />
 		<!-- **************************************************************** -->
 		<!-- **************************************************************** -->
@@ -106,7 +104,7 @@
  --><!-- For movable Tables  -->
  
 		<table id="myTable"
-			class="table table-striped table-bordered sortable" cellspacing="0"
+			class="table table-striped table-bordered sortable"  style="color:white" cellspacing="0"
 			width="100%">
 
 			<thead>
@@ -115,66 +113,58 @@
 				<!-- <th class="draggable right column_heading pointer marker" data-column="EID" style="cursor: move;">
 				EID</th> -->
 				
-					<th >Eid</th>
+					<th>Eid</th>
 					<th>UserId</th>
 					<th>Name</th>
 					<th>Email</th>
-					<th>DOB</th>
+					<th>DOB(YYYY-MM-DD)</th>
 					<th>Mobile Number</th>
 					<th>Delete/Edit</th>
 				</tr>
 			</thead>
-			<%
-			EmployeeDao employeeDao = new EmployeeDaoImpl();
-			List<EmployeeEntity> employeeList = new ArrayList<EmployeeEntity>();
-			employeeList = employeeDao.findAll();
-
-			for (EmployeeEntity employees : employeeList) {
-			%>
-			<tbody>
+			
+			<tbody> 
+			
+			<c:forEach items = "${employeeList}" var = "entity" >
+			
+			
 				<tr>
-					<td><%=employees.geteID()%></td>
-					<td><%=employees.getUserId()%></td>
-					<td><%=employees.getName()%></td>
-					<td><%=employees.getEmail()%></td>
-					<td><%=employees.getDate()%></td>
-					<td><%=employees.getMobile()%></td>
+					<td>${entity.eID}</td>
+					<td>${entity.userId}</td>
+					<td>${entity.name}</td>
+					<td>${entity.email}</td>
+					<td>${entity.date}</td>
+					<td>${entity.mobile}</td>
 					<td>
-					<a href="deletePersonServlet?email=<%=employees.getEmail()%>	">
-							<!-- We are making a Servlet class named "deletePerson" and "?" -> What you want to send as 
+					<c:if test="${entity.email !=sessionScope.userData.email}">
+					<a href="deletePersonServlet?email=${entity.email}	">
+							<!-- We are making a Servlet class named "deletePersonServlet" and "?" -> What you want to send as 
 						to that Servlet Class "email=" and value of the email, which is being sent -->
 
 							<!--  Whenever you send hyperlink, the method doGet() is called. -->
-							<button class = "btn btn-danger">
+						<button class = "myBtn deleteBtn">
 							<!--  FA icons -->
-							<i class="fa fa-trash-alt fa-sm"></i>
-						
+							<i class="far fa-trash-alt fa-sm"></i>
 						</button>
+						
 					</a>
+					<!--  Whenever you send hyperlink, the method doGet() is called. -->
+					<a href = "getEmployeeDataForEditServlet?userId=${entity.userId}" >
+					<button class="myBtn editBtn"><i class="fa fa-edit fa-sm"></i></button>
+					</a>
+					</c:if>
 					
-					
-					
-					
-					
-					
-					
-					
-					
-						
-						
 					</td>
 
 				</tr>
-				<%
-					}
-				%>
+				</c:forEach>
 			</tbody>
 		</table>
 
 	</div>
-
-	<footer
-		style="position: fixed; left: 0; bottom: 0; width: 100%; background-color: #00fff3;"></footer>
+    <br/>
+    <br/>
+	<footer class = "footer">@Copyright Banepali 2020</footer>
 
 
 </body>

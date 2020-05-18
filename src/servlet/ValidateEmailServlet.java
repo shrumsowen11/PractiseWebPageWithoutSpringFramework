@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dataBase.EmployeeDao;
 import dataBase.EmployeeDaoImpl;
@@ -27,18 +28,16 @@ public class ValidateEmailServlet extends HttpServlet {
 	
 			
 			if(employeeEntity.isPresent()) {
-				
-				
-
-				req.setAttribute("userData", employeeEntity.get());
-
+				HttpSession session = req.getSession(); ////benefits: we can get the data in everywhere, NOT on only forwarded page
+				session.setAttribute("userData", employeeEntity.get());
+				//"req.setAttribut()"//this only gives to the forwarded page
 				req.getRequestDispatcher("getNewPasswords.jsp").forward(req,resp);
 			
 			
 		}else {
 			
 			req.setAttribute("message","Sorry, Email not found. Try again");
-			req.getRequestDispatcher("forgotPassword.jsp").forward(req,resp);
+			req.getRequestDispatcher("emailValidate.jsp").forward(req,resp);
 		}
 	}
 	
