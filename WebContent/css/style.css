@@ -67,8 +67,29 @@
 
 .editBtn {
 	background-color: #0080c0; /* navyblue */
+	
+	
 }
 
 .editBtn:hover {
 	background-color: #005279; /* darknavyblue */
+	
 }
+
+.lockBtn {
+	background-color: #7c0707;  /* DARK BROWN */
+}
+
+.lockBtn:hover {
+	background-color: #500404;  /* darker brown */
+}
+
+.unlockBtn {
+	background-color: green;
+}
+
+.unlockBtn:hover {
+	background-color: #085108; /* darker green */
+}
+
+/* UPDATE `employee_tbl` SET active = CASE  WHEN( Active = "NO") THEN "YES" WHEN(UserID <> "shrums" ) THEN "NO" END */

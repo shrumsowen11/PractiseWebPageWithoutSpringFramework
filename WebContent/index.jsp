@@ -27,7 +27,11 @@
 style="background-image: url(Images/chinaTemple.jpg); background-size:cover; background-attachment:fixed; height:100%; width:100%">	
 
 
-	<header class="header"></header>
+	<header class="header">
+	 <b style="margin-left: 20px;">${applicationScope.email}</b>
+     
+      <b style="margin-left: 20px;">Mobile : ${applicationScope.mobile}</b>
+	</header>
 	<br />
 	<br />
 	
@@ -56,13 +60,14 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 				<div class="form-group" style=" width: 100%">
 
 					<form action="loginServlet" class = "myFormStyle" method="post">
-						<span style="font-size: 18px; color: red ; /* #ec8484 - slight pinky red */" ><h4><b>${message}</b></h4></span><br/>   <!-- Try to add the blinking effect  -->
+						<h4><span style="font-size: 18px; color: red ; /* #ec8484 - slight pinky red */" ><b>${message}</b></span></h4><br/>   <!-- Try to add the blinking effect  -->
 						<!-- when you do not write this "method", then automatically, it calls the doGet() method and this get method will show all the data(password also) in the browser title. -->
 						<!--methods are "post(secured), put, delete, patch, get(default and not secure)"  -->
 						<!-- whenever the submit button is clicked, then this page is called -->
 							
 						<h3 style="color: #e5fb2f/* light yellow */">Sign In:</h3>
-						<label for="email" style="color:white"> <b>Email Address: </b></label> <input type="email" class="form-control" name="temail" :focused
+						<label for="email" style="color:white"> <b>Email Address: </b></label>
+						 <input type="email" class="form-control" name="temail" 
 							<%-- value = "${updatedDataEmail}" --%> required
 							placeholder="Enter your Email"> <br /> 
 							

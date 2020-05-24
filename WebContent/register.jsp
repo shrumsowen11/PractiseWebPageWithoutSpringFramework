@@ -23,7 +23,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 <br/>
 <br/>
 	<div class="container mb-3 mt-3">
-	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font>
+	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font><br/>
 	<a href = "showAllData.jsp">
 		<img src = "Images/beatifulScene.jfif" style = "height: 180px">
 		</a>

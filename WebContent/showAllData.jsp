@@ -70,9 +70,9 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 <br/>
 <br/>
 	<div class="container mb-3 mt-3">
-	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font>
+	<font class="myTextStyle" face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font><br/>
 		<!--  margin bottom and margin top == 3-->
-		<a href="showAllData.jsp"> <img src="Images/beatifulScene.jfif"
+		<a href="showAllEmployeesServlet"> <img src="Images/beatifulScene.jfif"
 			style="height: 180px">
 		</a>
 		<a href="register.jsp">
@@ -81,6 +81,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 		<a href="logoutServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
 			<button type="button" class="btn btn-warning">LogOut</button>
 		</a>
+	
 		<br/>
 		<br/>
 		<span style = "font-size:18px; color: red;"  >${message} </span>
@@ -104,8 +105,8 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
  --><!-- For movable Tables  -->
  
 		<table id="myTable"
-			class="table table-striped table-bordered sortable"  style="color:white" cellspacing="0"
-			width="100%">
+			class="table table-striped table-bordered sortable myFormStyle"  style="color:white" 
+			>
 
 			<thead>
 				<tr>
@@ -120,6 +121,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 					<th>DOB(YYYY-MM-DD)</th>
 					<th>Mobile Number</th>
 					<th>Delete/Edit</th>
+			
 				</tr>
 			</thead>
 			

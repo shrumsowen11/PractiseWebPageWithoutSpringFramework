@@ -2,6 +2,7 @@ package dataBase;
 
 import dataBase.dao.entity.EmployeeEntity;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ public interface EmployeeDao {
     String update(EmployeeEntity entity);
 	String updatePassword(String email, String password);
 	String updateEmployeeByUserId(EmployeeEntity entity);
+	String updateEmployeeActiveStatus(String userId);
 
     
     
@@ -30,6 +32,10 @@ public interface EmployeeDao {
 	int deleteByEmail(String email);
 
 	int getIncrementedEId();
+
+	long getStartTime();
+	long getEndTime();
+
 
 
 

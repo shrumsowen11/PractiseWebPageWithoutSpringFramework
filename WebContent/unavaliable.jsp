@@ -29,15 +29,15 @@
 style="background-image: url(Images/chinaTemple.jpg); background-size:cover; background-attachment:fixed; height:100%; width:100%">	
 
 	<header style="background-color: #03a9f4; height: 30px;">
-	   <b>Address : = ${applicationScope.address}</b> 
+	   <b>Address : ${applicationScope.address}</b> 
 	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<b style="color:yellow;">Email : = ${applicationScope.email}</b> 
+	<b style="color:yellow;">Email : ${applicationScope.email}</b> 
 	 </header>
 	<div  class="container">
 	     <hr style="border-top: 5px solid rgba(103,58,183,1);"/>
-		<img src="img/student.png" class="semere"  style="height: 200px;">
-		<h1>Sorry! this application is only up and running between ${applicationScope.startTime} PM to ${applicationScope.endTime} PM only</h1>	
-		<img src="img/sorry.jpg" class="semere"  style="height: 330px;">
+		<img src="Images/blueSky.jpg" class="semere"  style="height: 200px;">
+		<h1>Sorry! this application is only up and running between ${applicationScope.startTimeInMillis} PM to ${applicationScope.endTimeInMillis} PM only</h1>	
+		<img src="Images/blueSky.jpg" class="semere"  style="height: 330px;">
 		
 	</div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2020 at 10:52 PM
+-- Generation Time: May 19, 2020 at 05:49 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.29
 
@@ -38,19 +38,20 @@ CREATE TABLE `employee_tbl` (
   `SALARY` double DEFAULT NULL,
   `SSN` bigint(11) NOT NULL,
   `CREATEDATE` timestamp NULL DEFAULT NULL,
-  `UPDATEDATE` timestamp NULL DEFAULT NULL
+  `UPDATEDATE` timestamp NULL DEFAULT NULL,
+  `Role` varchar(20) NOT NULL DEFAULT 'Customer'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `employee_tbl`
 --
 
-INSERT INTO `employee_tbl` (`EID`, `UserID`, `Password`, `NAME`, `EMAIL`, `DOB`, `MOBILE`, `SALARY`, `SSN`, `CREATEDATE`, `UPDATEDATE`) VALUES
-(3, 'rabinabasnet11', 'bmb11', 'Rabina', 'rabina@gmail.com', '1995-09-09', 43532454, 450000, 43535, NULL, NULL),
-(1, 'shrums', 'shrums', 'shrums', 'shrums@gmail.com', '1994-05-12', 2435235, 2435235, 2435235, '2020-05-07 04:00:00', '2020-05-21 04:00:00'),
-(0, 'bibhu', 'bibhu', 'bibhu', 'bibhu@gmail.com', '2020-09-09', 123, 1500, 123, NULL, NULL),
-(23, 'beckham', 'beckham', 'beckham', 'beckham@gmail.com', '1889-09-09', 234234, 34000000000, 234234, NULL, NULL),
-(0, 'kaji', 'kaji', 'kaji', 'kaji@gmail.com', '2020-04-02', 324, 3000, 324, NULL, NULL);
+INSERT INTO `employee_tbl` (`EID`, `UserID`, `Password`, `NAME`, `EMAIL`, `DOB`, `MOBILE`, `SALARY`, `SSN`, `CREATEDATE`, `UPDATEDATE`, `Role`) VALUES
+(1, 'shrums', 'shrums', 'shrums', 'shrums@gmail.com', '1994-05-12', 2435235, 2435235, 2435235, '2020-05-07 04:00:00', '2020-05-21 04:00:00', 'Customer'),
+(0, 'bibhu', 'bibhu', 'bibhu', 'bibhu@gmail.com', '2020-09-09', 123, 1500, 123, NULL, NULL, 'Customer'),
+(4, 'Bidur', 'test', 'Bidur', 'bidur@gmail.com', '1998-03-04', 213, 2000, 11, NULL, NULL, 'Customer'),
+(5, 'bidur', 'a', 'a', 'a@gmail.com', '2020-03-02', 1212, 1500, 234, NULL, NULL, 'Customer'),
+(6, 'pukar', 'test', 'Pukar', 'pukar@gmail.com', '1996-03-03', 123, 2000, 123, NULL, NULL, 'Customer');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -73,6 +74,30 @@ public class UpdateEmployeeDataServlet extends HttpServlet {
 		} else {
 			sssn = Long.parseLong(ssn);
 		}
+		
+	
+        String startTime = request.getParameter("startTime");
+        Time sTime = null;
+        if(startTime == null) {
+        	empty = true;
+        }else {
+        	sTime = DateUtils.timeFromString(startTime);
+        }
+        
+        String endTime = request.getParameter("endTime");
+        Time eTime = null;
+        if(endTime == null) {
+        	empty = true;
+        }else {
+        	eTime = DateUtils.timeFromString(endTime);
+        }
+        
+        
+		  String active = request.getParameter("active");
+		 
+			if (active == null) {
+				empty = true;
+			}
 
 		// Setting the message inside the request scope
 		if (empty) { // if "empty equals true"
@@ -82,7 +107,7 @@ public class UpdateEmployeeDataServlet extends HttpServlet {
 		} else {
 			EmployeeDao employeeDao = new EmployeeDaoImpl();
 			EmployeeEntity entity = new EmployeeEntity(employeeDao.getIncrementedEId(), userid, password, name, email, dateFromStringAgain, mob, sal,
-					sssn, null, null, new EmployeeEntity().getRole());
+					sssn, null, null, new EmployeeEntity().getRole(), sTime,eTime,active);
 			employeeDao.updateEmployeeByUserId(entity);
 
 			request.setAttribute("message", "You have successfully updated.");

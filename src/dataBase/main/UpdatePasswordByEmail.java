@@ -2,11 +2,8 @@ package dataBase.main;
 
 import dataBase.EmployeeDao;
 import dataBase.EmployeeDaoImpl;
-import dataBase.dao.entity.EmployeeEntity;
-import dataBase.utils.DateUtils;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Scanner;
 
 public class UpdatePasswordByEmail {

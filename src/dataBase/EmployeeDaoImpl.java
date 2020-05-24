@@ -1,17 +1,19 @@
 package dataBase;
 
 import dataBase.dao.entity.EmployeeEntity;
+import dataBase.utils.LocalTimeUtil;
 import dataBase.utils.SQLConnectionUtils;
 import dataBase.utils.SQLQueries;
+
+import java.io.InputStream;
 import java.sql.*;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 //import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.Part;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -46,9 +48,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return rowCount > 0 ? "Rows Updated." : "Rows not Updated.";
 
 	}
-	
-	
-	
 
 	@Override
 	public List<EmployeeEntity> findAll() {
@@ -73,9 +72,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				Timestamp createDate = resultSet.getTimestamp(10);
 				Timestamp updateDate = resultSet.getTimestamp(11);
 				String role = resultSet.getString(12);
+				Time sTime = resultSet.getTime(13);
+				Time eTime = resultSet.getTime(14);
+				String active = resultSet.getString(15);
 
 				EmployeeEntity employeeEntity = new EmployeeEntity(eID, userId, password, name, email, date, mobile,
-						salary, ssn, createDate, updateDate, role);
+						salary, ssn, createDate, updateDate, role, sTime, eTime, active);
 
 				employeeEntities.add(employeeEntity);
 			}
@@ -89,8 +91,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employeeEntities;
 	}
 
-	
-	
 	@Override
 	public List<String> findAllUserId() {
 		List<String> userIds = new ArrayList<String>();
@@ -101,21 +101,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			while (resultSet.next()) {
 				userIds.add(resultSet.getString(1));
-				}
+			}
 
 			// printing all the employees from the list
-			
+
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return userIds;
 	}
 
-
-	
-	
-	
-	
 	@Override
 	public int deleteById(int eID) {
 		int rowCount = 0;
@@ -130,9 +125,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return rowCount;
 	}
-	
-	
-	
 
 	@Override
 	public int deleteByEmail(String email) {
@@ -148,9 +140,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return rowCount;
 	}
-	
-	
-	
 
 	@Override
 	public EmployeeEntity employeeById(int eID) {
@@ -163,7 +152,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11),resultSet.getString(12));
+						resultSet.getTimestamp(11), resultSet.getString(12), resultSet.getTime(13),
+						resultSet.getTime(14), resultSet.getString(15));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -171,7 +161,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return employeeEntities;
 	}
-	
+
 	@Override
 	public EmployeeEntity employeeByUserId(String userId) {
 		EmployeeEntity employeeEntities = null;
@@ -183,7 +173,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11),resultSet.getString(12));
+						resultSet.getTimestamp(11), resultSet.getString(12), resultSet.getTime(13),
+						resultSet.getTime(14), resultSet.getString(15));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -191,7 +182,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return employeeEntities;
 	}
-	
 
 	@Override
 	public EmployeeEntity employeeByEmail(String email) {
@@ -204,7 +194,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11),resultSet.getString(12));
+						resultSet.getTimestamp(11), resultSet.getString(12), resultSet.getTime(13),
+						resultSet.getTime(14), resultSet.getString(15));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -212,11 +203,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return employeeEntities;
 	}
-	
-	
-	
-	
-	
 
 	@Override
 	public Optional<EmployeeEntity> optionalEmployeeByEmail(String email) {
@@ -229,7 +215,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11),resultSet.getString(12));
+						resultSet.getTimestamp(11), resultSet.getString(12), resultSet.getTime(13),
+						resultSet.getTime(14), resultSet.getString(15));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -252,7 +239,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employeeEntities = new EmployeeEntity(resultSet.getInt(1), resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6),
 						resultSet.getLong(7), resultSet.getDouble(8), resultSet.getLong(9), resultSet.getTimestamp(10),
-						resultSet.getTimestamp(11),resultSet.getString(12));
+						resultSet.getTimestamp(11), resultSet.getString(12), resultSet.getTime(13),
+						resultSet.getTime(14), resultSet.getString(15));
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
@@ -260,6 +248,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return Optional.ofNullable(employeeEntities);
 	}
+
+	/*
+	 * @Override public String upload(EmployeeEntity entity) { InputStream
+	 * inputStream = null; // input stream of the upload file
+	 * 
+	 * // obtains the upload file part in this multipart request Part filePart =
+	 * request.getPart("photo"); if (filePart != null) { // prints out some
+	 * information for debugging System.out.println(filePart.getName());
+	 * System.out.println(filePart.getSize());
+	 * System.out.println(filePart.getContentType());
+	 * 
+	 * // obtains input stream of the upload file inputStream =
+	 * filePart.getInputStream(); }
+	 */
 
 	@Override
 	public String update(EmployeeEntity entity) {
@@ -391,27 +393,67 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return rowCount > 0 ? "Update Successful" : "Not updated yet. ";
 	}
 	
+	
+
+	@Override
+	public long getStartTime() {
+		long startTimeInMillis = 0;
+		try (Connection conn = SQLConnectionUtils.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_STARTTIME)) {
+			ResultSet resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+				Time startTime = resultSet.getTime(1);
+				startTimeInMillis = LocalTimeUtil.getTimeInMillis(startTime);
+			}
+
+		} catch (SQLException | ClassNotFoundException throwables) {
+			throwables.printStackTrace();
+		}
+		return startTimeInMillis;
+	}
+	
+	
+	
+
+	@Override
+	public long getEndTime() {
+		long endTimeInMillis = 0;
+		try (Connection conn = SQLConnectionUtils.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_ENDTIME)) {
+			ResultSet resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+				Time endTime = resultSet.getTime(1);
+				endTimeInMillis = LocalTimeUtil.getTimeInMillis(endTime);
+			}
+
+		} catch (SQLException | ClassNotFoundException throwables) {
+			throwables.printStackTrace();
+		}
+		return endTimeInMillis;
+	}
+
+	
+	
+	
 	@Override
 	public int getIncrementedEId() {
 		int eId = 1;
 		try (Connection conn = SQLConnectionUtils.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_MAX_EID)) {
 			ResultSet resultSet = pstmt.executeQuery();
-			if(resultSet.next()) {
+			if (resultSet.next()) {
 				eId = resultSet.getInt(1);
 				eId++;
 			}
-			
-		}catch (SQLException | ClassNotFoundException throwables) {
+
+		} catch (SQLException | ClassNotFoundException throwables) {
 			throwables.printStackTrace();
 		}
-		
+
 		return eId;
-		
+
 	}
-	
-	
-	
+
 	@Override
 	public String updateEmployeeByUserId(EmployeeEntity entity) {
 		EmployeeDao employeeDao = null;
@@ -442,9 +484,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			} else {
 				employeeDao.employeeByUserId(entity.getUserId()).geteID();
 				pstmt.setInt(1, employeeDao.employeeByUserId(entity.getUserId()).geteID());
-				
+
 			}
-			
+
 			if (entity.getUserId() != null) {
 				employeeEntity.setUserId(entity.getUserId());
 				pstmt.setString(2, entity.getUserId());
@@ -485,7 +527,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				pstmt.setDate(6, new java.sql.Date(entity.getDate().getTime()));
 			} else {
 				employeeDao.employeeByUserId(entity.getUserId()).getDate();
-				pstmt.setDate(6, new java.sql.Date(employeeDao.employeeByUserId(entity.getUserId()).getDate().getTime()));
+				pstmt.setDate(6,
+						new java.sql.Date(employeeDao.employeeByUserId(entity.getUserId()).getDate().getTime()));
 
 			}
 
@@ -542,27 +585,77 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		return rowCount > 0 ? "Update Successful" : "Not updated yet. ";
 	}
-	
-	
-	
-	
-	
 
 	@Override
 	public String updatePassword(String email, String password) {
-		//EmployeeDao employeeDao = null;
+		// EmployeeDao employeeDao = null;
 		int rowCount = 0;
 		try (Connection conn = SQLConnectionUtils.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.UPDATE_EMP_PASSWORD)) {
 			pstmt.setString(1, password);
 			pstmt.setString(2, email);
-			
+
 			rowCount = pstmt.executeUpdate();
-			
-			
+
 		} catch (SQLException | ClassNotFoundException throwables) {
 			throwables.printStackTrace();
 		}
 		return rowCount > 0 ? "Update Successful" : "Not updated yet. ";
+	}
+
+	@Override
+	public String updateEmployeeActiveStatus(String userId) {
+
+		String status = employeeByUserId(userId).getActive();
+
+		System.out.println(status);
+		if (status.equals("YES")) { // the "Active" status of the employee was "YES"
+			int rowCount = 0;
+
+			try (Connection conn = SQLConnectionUtils.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(SQLQueries.UPDATE_EMP_ACTIVE_STATUS_OFF);) {
+				pstmt.setString(1, userId);
+				rowCount = pstmt.executeUpdate();
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(" \t\t\t\t UPDATE_EMP_ACTIVE_STATUS_OFF  was called");
+			return rowCount > 0 ? "Update Successful" : "Not updated Yet";
+		}
+
+		else { // the "Active" status of the employee was "NO"
+			int rowCountOn = 0;
+			int rowCountOff = 0;
+
+			try (Connection conn = SQLConnectionUtils.getConnection();
+					PreparedStatement pstmtSetOn = conn.prepareStatement(SQLQueries.UPDATE_EMP_ACTIVE_STATUS_ON);
+					PreparedStatement pstmtSetOff = conn
+							.prepareStatement(SQLQueries.UPDATE_REMAIN_EMP_ACTIVE_STATUS_OFF)) {
+				pstmtSetOn.setString(1, userId);
+				pstmtSetOff.setString(1, userId);
+				rowCountOn = pstmtSetOn.executeUpdate();
+				rowCountOff = pstmtSetOff.executeUpdate();
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("\t\t\t\t UPDATE_EMP_ACTIVE_STATUS_ON  was called");
+			if (rowCountOn > 0) {
+				if (rowCountOff > 0) {
+					return "Update Successful";
+				} else {
+					return "Not updated Yet due to \"UPDATE_REMAIN_EMP_ACTIVE_STATUS_OFF\"";
+				}
+			} else {
+				if (rowCountOff > 0) {
+					return "Update Successful";
+				} else {
+					return "Not updated Yet due to \"UPDATE_EMP_ACTIVE_STATUS_ON\"";
+				}
+			}
+
+		}
+
 	}
 }

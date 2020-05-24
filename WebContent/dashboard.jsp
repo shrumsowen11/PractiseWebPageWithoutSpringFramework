@@ -55,6 +55,9 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 		<a href="register.jsp">
 					<button type="button" class="btn btn-success">Register/Sign Up</button>
 				</a>
+					<a href="showAllEmployeesBlockTimeServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
+			<button type="button" class="btn btn-primary">Block Time</button>
+		</a>
 		
 		
 		
@@ -73,7 +76,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 			
 		</div>
 
-	</div>
+
 	<br/>
     <br/>
 	<footer class = "footer">@Copyright Banepali 2020</footer>

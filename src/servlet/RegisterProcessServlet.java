@@ -87,7 +87,7 @@ public class RegisterProcessServlet extends HttpServlet {
 		} else {
 
 			EmployeeEntity entity = new EmployeeEntity(employeeDao.getIncrementedEId(), userid, password, name, email,
-					dateFromStringAgain, mob, sal, sssn, null, null, new EmployeeEntity().getRole());
+					dateFromStringAgain, mob, sal, sssn, null, null, new EmployeeEntity().getRole(), new EmployeeEntity().getStartTime(), new EmployeeEntity().getEndTime(), new EmployeeEntity().getActive());
 			employeeDao.save(entity);
 
 			request.setAttribute("message", "You have succcessfully registered..");

@@ -58,7 +58,7 @@
 		<a href="logoutServlet"> <!-- Simple Button --> <!-- <button>Show Employees</button> -->
 			<button type="button" class="btn btn-danger" style="position: absolute; top:5px; right: 10px;">LogOut</button>
 		</a> <!-- Add a welcome message we the name in it --></header>
-	</header>
+	
 <br/>
 <br/>
 	<div class="container mb-3 mt-3">
@@ -72,8 +72,8 @@
 		<!--****Make the connection to the preferred DataBase and Start Xamppp****  -->
 
 	 <table id="myTable"
-			class="table table-striped table-bordered sortable"  style="color:white" cellspacing="0"
-			width="100%">
+			class="table table-striped table-bordered sortable myFormStyle"  style="color:white" 
+			>
 
 			<thead>
 				<tr>
@@ -82,6 +82,7 @@
 					<th>Name</th>
 					<th>Email</th>					
 					<th>Mobile Number</th>
+					
 					
 				</tr>
 			</thead>

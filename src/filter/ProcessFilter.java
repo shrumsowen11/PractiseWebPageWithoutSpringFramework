@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //(/*) --> intercepting all the incoming requests  --> sabbailai rokirakhyeko cha
-//@WebFilter("/*")
+@WebFilter(filterName="processFilter")
 public class ProcessFilter implements Filter {
 	Set<String> allowedResources = new HashSet<>();
 
@@ -28,7 +28,7 @@ public class ProcessFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request; //this is child of ServletRequest
 		String resourceName = httpServletRequest.getServletPath(); //resourceName --> gets url -> anything jsp, servlet,
-		System.out.println("This \t"+resourceName + "came at " + LocalDateTime.now());
+		System.out.println("This \t"+resourceName + " came at " + LocalDateTime.now());
 		if (allowedResources.contains(resourceName) ||
 				resourceName.contains("Images/") ||
 				resourceName.contains("css/")) {
@@ -61,7 +61,7 @@ public class ProcessFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 		allowedResources.add("/index.jsp");
 		allowedResources.add("/loginServlet");
-		allowedResources.add("/dashboard.jsp");
+		
 		allowedResources.add("/register.jsp");
 		allowedResources.add("/registerProcessServlet");
 		allowedResources.add("/unavaliable.jsp");

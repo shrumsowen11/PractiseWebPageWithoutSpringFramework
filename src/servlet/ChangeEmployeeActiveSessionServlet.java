@@ -13,8 +13,8 @@ import dataBase.EmployeeDaoImpl;
 import dataBase.dao.entity.EmployeeEntity;
 
 @SuppressWarnings("serial")
-@WebServlet("/getEmployeeDataForEditServlet")
-public class GetEmployeeDataForEditServlet extends HttpServlet {
+@WebServlet("/changeEmployeeActiveSessionServlet")
+public class ChangeEmployeeActiveSessionServlet extends HttpServlet {
 
 	
 	@Override
@@ -22,10 +22,13 @@ public class GetEmployeeDataForEditServlet extends HttpServlet {
 		
 		String userId = req.getParameter("userId");
 		EmployeeDao employeeDao = new EmployeeDaoImpl();
-		EmployeeEntity employeeEntity = employeeDao.employeeByUserId(userId);
-		req.setAttribute("message", "Please edit the fields you like to update.");
-		req.setAttribute("employeeEntity", employeeEntity);
-		req.getRequestDispatcher("editEmploeeData.jsp").forward(req,resp);
+		employeeDao.updateEmployeeActiveStatus(userId); // first it will change the "Active" status based on the userId passed through and then
+		
+		
+		//EmployeeEntity employeeEntity = employeeDao.employeeByUserId(userId); // gets the new employeeEntity based on the same userId passed through and then
+		//req.setAttribute("message", "Active Role changed.");  
+		//req.setAttribute("employeeEntity", employeeEntity);  //sets the attributes of the new updated employeeEntity and then
+		req.getRequestDispatcher("showAllEmployeesBlockTimeServlet").forward(req,resp); //dispatches responses and set attributes to the request to the upcoming .jsp page
 	}
 
 	@Override

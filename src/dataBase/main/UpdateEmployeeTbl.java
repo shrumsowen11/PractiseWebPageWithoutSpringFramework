@@ -6,6 +6,7 @@ import dataBase.dao.entity.EmployeeEntity;
 import dataBase.utils.DateUtils;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -43,8 +44,21 @@ public class UpdateEmployeeTbl {
 
         System.out.println("Enter the ssn: ");
         long ssn = scan.nextLong();
+        
+        
+        System.out.println("Enter the Start Time: ");
+        String startTime = scan.next();
+        Time sTime = DateUtils.timeFromString(startTime);
+        
+        System.out.println("Enter the End Time: ");
+        String endTime = scan.next();
+        Time eTime = DateUtils.timeFromString(endTime);
+        
+        System.out.println("Are you Active: ");
+        String active = scan.next();
+       
 
-        EmployeeEntity entity = new EmployeeEntity(eid,userid, password, name,email, new java.sql.Date(date1.getTime()), mobile,salary,ssn,null,null,new EmployeeEntity().getRole());
+        EmployeeEntity entity = new EmployeeEntity(eid,userid, password, name,email, new java.sql.Date(date1.getTime()), mobile,salary,ssn,null,null,new EmployeeEntity().getRole(), sTime,eTime,active);
 
         System.out.println("Saving all the data of the new Employee inside the entity in the JAVA side first...");
 

@@ -23,7 +23,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 <br/>
 <br/>
 	<div class="container mb-3 mt-3">
-	<font face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font>
+	<font face = "Showcard Gothic" size = "5" style="color: #00ffaca6; ">WARLIONS</font><br/>
 	<a href = "showAllData.jsp">
 		<img src = "Images/beatifulScene.jfif" style = "height: 180px">
 		</a>
@@ -33,9 +33,9 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 		
 		<hr/>
 		
-		<h3 style = "color: Blue">Employee Update Page</h3>
+		<h1 style = "color: Blue">Employee Update Page</h1>
 		
-		<span style ="font-size: 18px; color: red;">${message}</span>
+		<span style ="font-size: 18px; color: red;"><b>${message}</b></span>
 		<hr/>
 		
 		<div class ="form-group" style = "width: 50%">
@@ -56,11 +56,11 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 			<br/>
 			
 			<label for = "name" style="color:white"> Name*: </label>
-			<input type = "text" class = "form-control" name = "name" placeholder = "Enter your name">
+			<input type = "text" class = "form-control" name = "name" placeholder = "Enter your name" value = "${employeeEntity.name}">
 			<br/>
 			
 			<label for = "email" style="color:white"> Email*: </label>
-			<input type = "email" class = "form-control" name = "email" placeholder = "Enter your email">
+			<input type = "email" class = "form-control" name = "email" placeholder = "Enter your email" value = "${employeeEntity.email}">
 			<br/>
 			
 			<label for = "dob" style="color:white"> Date of Birth*: </label>
@@ -68,7 +68,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 			<br/>
 			
 			<label for = "mobile" style="color:white"> Mobile: </label>
-			<input type = "tel" class = "form-control" name = "mobile" placeholder = "Enter your mobile number">
+			<input type = "tel" class = "form-control" name = "mobile" placeholder = "Enter your mobile number" value = "${employeeEntity.mobile}">
 			<br/>
 			
 			<label for = "salary" style="color:white"> Salary Range: </label>
@@ -89,7 +89,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 			<br/>
 			
 			<label for = "ssn" style="color:white"> SSN*: </label>
-			<input type = "number" class = "form-control" name = "ssn" placeholder = "Enter your ssn">
+			<input type = "number" class = "form-control" name = "ssn" placeholder = "Enter your ssn" value = "${employeeEntity.ssn}">
 			<br/>
 			
 			

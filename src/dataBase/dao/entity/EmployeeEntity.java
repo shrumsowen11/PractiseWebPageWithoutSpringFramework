@@ -1,5 +1,6 @@
 package dataBase.dao.entity;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -16,12 +17,20 @@ public class EmployeeEntity {
     private Timestamp createDate;
     private Timestamp updateDate;
     String role = "Customer";
-
+    private Time startTime; 
+    private Time endTime;
+    private String active;
 	
 	public EmployeeEntity() { }
 	 
-    public EmployeeEntity(int eID, String userId, String password, String name, String email, Date date, long mobile,
-			double salary, long ssn, Timestamp createDate, Timestamp updateDate, String role) {
+  
+
+
+
+
+	public EmployeeEntity(int eID, String userId, String password, String name, String email, Date date, long mobile,
+			double salary, long ssn, Timestamp createDate, Timestamp updateDate, String role, Time startTime,
+			Time endTime, String active) {
 		super();
 		this.eID = eID;
 		this.userId = userId;
@@ -35,7 +44,66 @@ public class EmployeeEntity {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 		this.role = role;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.active = active;
 	}
+
+
+
+
+
+
+	public Time getStartTime() {
+		return startTime;
+	}
+
+
+
+
+
+
+	public void setStartTime(Time startTime) {
+		this.startTime = startTime;
+	}
+
+
+
+
+
+
+	public Time getEndTime() {
+		return endTime;
+	}
+
+
+
+
+
+
+	public void setEndTime(Time endTime) {
+		this.endTime = endTime;
+	}
+
+
+
+
+
+
+	public String getActive() {
+		return active;
+	}
+
+
+
+
+
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
+
 
 
 
@@ -128,7 +196,20 @@ public class EmployeeEntity {
         this.createDate = createDate;
     }
 
-    public Timestamp getUpdateDate() {
+    @Override
+	public String toString() {
+		return "EmployeeEntity [eID=" + eID + ", userId=" + userId + ", password=" + password + ", name=" + name
+				+ ", email=" + email + ", date=" + date + ", mobile=" + mobile + ", salary=" + salary + ", ssn=" + ssn
+				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", role=" + role + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", active=" + active + "]";
+	}
+
+
+
+
+
+
+	public Timestamp getUpdateDate() {
         return updateDate;
     }
 
@@ -136,10 +217,5 @@ public class EmployeeEntity {
         this.updateDate = updateDate;
     }
 
-    @Override
-	public String toString() {
-		return "EmployeeEntity [eID=" + eID + ", userId=" + userId + ", password=" + password + ", name=" + name
-				+ ", email=" + email + ", date=" + date + ", mobile=" + mobile + ", salary=" + salary + ", ssn=" + ssn
-				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", role=" + role + "]";
-	}
+   
 }

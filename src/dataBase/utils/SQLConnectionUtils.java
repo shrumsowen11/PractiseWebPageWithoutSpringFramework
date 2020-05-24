@@ -2,7 +2,6 @@ package dataBase.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SQLConnectionUtils {
@@ -18,7 +17,7 @@ public class SQLConnectionUtils {
         Connection conn = DriverManager.getConnection(url,username, password);
 
         if (conn != null){
-            System.out.println("Connection Established...!!!");
+            System.out.println("\t\t\t\tConnection Established...!!!");
         }
         return conn;
     }
