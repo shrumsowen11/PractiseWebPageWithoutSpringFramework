@@ -23,6 +23,7 @@ import dataBase.utils.LocalTimeUtil;
 //All the incoming request
 @WebFilter(filterName="blockingFilter")
 public class SessionBlockerFilter implements Filter {
+	
 private Set<String> allowedUrls=new HashSet<>();
 	
 	private  long startTime=00*60*60*1000;
@@ -45,7 +46,7 @@ private Set<String> allowedUrls=new HashSet<>();
 		
 		//Reference type casting = Downcasting
 		 HttpServletRequest httpServletRequest =(HttpServletRequest)request;
-		 updateTimeBlocker(httpServletRequest);
+		 updateTimeBlocker(httpServletRequest);  //this method is defined just above this "doFilter()" method
 		 
 		 String resourceName=httpServletRequest.getServletPath();
 		 System.out.println("BlockingFilter Accessing resource = "+resourceName+" at time  "+LocalDateTime.now());

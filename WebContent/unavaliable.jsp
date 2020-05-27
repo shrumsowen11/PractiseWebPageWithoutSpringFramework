@@ -36,7 +36,7 @@ style="background-image: url(Images/chinaTemple.jpg); background-size:cover; bac
 	<div  class="container">
 	     <hr style="border-top: 5px solid rgba(103,58,183,1);"/>
 		<img src="Images/blueSky.jpg" class="semere"  style="height: 200px;">
-		<h1>Sorry! this application is only up and running between ${applicationScope.startTimeInMillis} PM to ${applicationScope.endTimeInMillis} PM only</h1>	
+		<h1>Sorry! this application is only up and running between ${applicationScope.startTime} PM to ${applicationScope.endTime} PM only</h1>	
 		<img src="Images/blueSky.jpg" class="semere"  style="height: 330px;">
 		
 	</div>

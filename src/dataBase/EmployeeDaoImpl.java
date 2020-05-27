@@ -1,19 +1,15 @@
 package dataBase;
 
 import dataBase.dao.entity.EmployeeEntity;
-import dataBase.utils.LocalTimeUtil;
 import dataBase.utils.SQLConnectionUtils;
 import dataBase.utils.SQLQueries;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
-//import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.Part;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -396,40 +392,40 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	
 
 	@Override
-	public long getStartTime() {
-		long startTimeInMillis = 0;
+	public Time getStartTime() {
+		Time startTime = null;
 		try (Connection conn = SQLConnectionUtils.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_STARTTIME)) {
 			ResultSet resultSet = pstmt.executeQuery();
 			if (resultSet.next()) {
-				Time startTime = resultSet.getTime(1);
-				startTimeInMillis = LocalTimeUtil.getTimeInMillis(startTime);
+				startTime = resultSet.getTime(1);
+				//startTimeInMillis = LocalTimeUtil.getTimeInMillis(startTime);
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
 			throwables.printStackTrace();
 		}
-		return startTimeInMillis;
+		return startTime;
 	}
 	
 	
 	
 
 	@Override
-	public long getEndTime() {
-		long endTimeInMillis = 0;
+	public Time getEndTime() {
+		Time endTime = null;
 		try (Connection conn = SQLConnectionUtils.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(SQLQueries.SELECT_ENDTIME)) {
 			ResultSet resultSet = pstmt.executeQuery();
 			if (resultSet.next()) {
-				Time endTime = resultSet.getTime(1);
-				endTimeInMillis = LocalTimeUtil.getTimeInMillis(endTime);
+				endTime = resultSet.getTime(1);
+				//endTimeInMillis = LocalTimeUtil.getTimeInMillis(endTime);
 			}
 
 		} catch (SQLException | ClassNotFoundException throwables) {
 			throwables.printStackTrace();
 		}
-		return endTimeInMillis;
+		return endTime;
 	}
 
 	

@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
 //(/*) --> intercepting all the incoming requests  --> sabbailai rokirakhyeko cha
 @WebFilter(filterName="processFilter")
 public class ProcessFilter implements Filter {
+	
 	Set<String> allowedResources = new HashSet<>();
-
 	
 
 	@Override
@@ -61,7 +61,6 @@ public class ProcessFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 		allowedResources.add("/index.jsp");
 		allowedResources.add("/loginServlet");
-		
 		allowedResources.add("/register.jsp");
 		allowedResources.add("/registerProcessServlet");
 		allowedResources.add("/unavaliable.jsp");

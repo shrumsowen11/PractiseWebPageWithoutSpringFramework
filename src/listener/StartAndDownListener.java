@@ -6,6 +6,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import filter.TimeBlockerFilter;
+
 @WebListener
 
 public class StartAndDownListener implements ServletContextListener {
@@ -25,6 +27,11 @@ public class StartAndDownListener implements ServletContextListener {
 		servletContext.setAttribute("email", "shrums@gmail.com");
 		servletContext.setAttribute("mobile", "15156435");
 		servletContext.setAttribute("address", "dfsgsdfg");
+		
+		//In order to update the time according to the "time_schedule_tbl" in the database, I wrote the below statement
+		//this "TimeBlockerFilter" is in the "PractiseWebPage/Java Resource/src/filter" package
+        TimeBlockerFilter.updateTimeBlocker(servletContext);
+
 
 	}
 	

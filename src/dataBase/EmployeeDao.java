@@ -33,8 +33,8 @@ public interface EmployeeDao {
 
 	int getIncrementedEId();
 
-	long getStartTime();
-	long getEndTime();
+	Time getStartTime();
+	Time getEndTime();
 
 
 
